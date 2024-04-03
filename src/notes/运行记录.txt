@@ -1,0 +1,1 @@
+1.初次搭建环境时，使用pip install -r requirement.txt以安装依赖包
