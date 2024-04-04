@@ -1,13 +1,10 @@
 import os.path
 
 from core.config import get_config
-from core.logging import logger
 from core.util import data_util
 
 __lang_env = get_config("lang_env")
 __lang_path = os.path.join(os.getcwd(), get_config("lang_path"), "%s.json" % __lang_env)
-__lang_path = __lang_path.replace("'", "")
-logger.info(__lang_path)
 __lang = data_util.load_json_data(__lang_path)
 
 

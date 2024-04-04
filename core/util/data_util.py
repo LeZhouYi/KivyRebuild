@@ -16,3 +16,10 @@ def load_json_data(file_path: str):
             return json.load(f)
     else:
         raise Exception("Json file: [%s] not exist" % file)
+
+
+def set_data(instance, **kwargs):
+    """若instance中存在属性，则赋值"""
+    for key, value in kwargs.items():
+        if hasattr(instance, key):
+            setattr(instance, key, value)
