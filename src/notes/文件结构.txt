@@ -2,6 +2,19 @@ bin/: 运行文件
 core/: 核心代码
     app/: 应用实例
         main/: 主程序应用
+    config/: 配置，公共变量
+        config.py: 加载配置文件
+    lang/: 多语言
+    logging/: 日志
     util/: 通用文件
+        data_util.py: 数据读写
+        widget_util.py: 控件计算、判断相关
+    widget/: 通用控件库
+        layout/: 布局相关
+        style.py: 控件样式、基础属性相关
+data/: 运行产生的数据，用户数据
+    log/: 日志文件
 src/: 资源文件
+    config/: 配置文件
+    lang/: 多语言文件
     notes/: 笔记
