@@ -1,0 +1,14 @@
+#:kivy 2.3.0
+<IconLabel>:
+    Image:
+        source: root.icon_source
+        pos: root.x + root.pos_offset[0], root.y + root.pos_offset[1]
+        size: root.icon_size
+
+<RightIconLabel>:
+    pos_offset: self.width-dp(25), dp(5)
+    size_hint_x: None
+    padding: dp(5),0,0,0
+    width: dp(90)
+    text_size: self.size
+    valign: "middle"

@@ -1,0 +1,44 @@
+#:kivy 2.3.0
+<SkinManageLayout>:
+    canvas_color: self.get_style("border_color")
+    orientation: "vertical"
+    padding: dp(5)
+    spacing: dp(5)
+    # 标题栏
+    ColorBoxLayout:
+        canvas_color: self.get_style("background_color")
+        orientation: "horizontal"
+        height: dp(30)
+        size_hint_y: None
+        spacing: dp(5)
+        IconLabel:
+            id: menu_button
+            size_hint_x: None
+            width: dp(30)
+            icon_source: self.get_style("menu_icon")
+            icon_normal: self.get_style("menu_icon")
+            icon_hover: self.get_style("active_menu_icon")
+        ColorLabel:
+            text: self.get_text("1000")
+            text_size: self.size
+            valign: "middle"
+            canvas_color: self.get_style("background_color")
+            color: self.get_style("font_color")
+        IconLabel:
+            id: home_button
+            size_hint_x: None
+            width: dp(30)
+            icon_source: self.get_style("home_icon")
+            icon_normal: self.get_style("home_icon")
+            icon_hover: self.get_style("active_home_icon")
+        IconLabel:
+            id: setting_button
+            size_hint_x: None
+            width: dp(30)
+            icon_source: self.get_style("setting_icon")
+            icon_normal: self.get_style("setting_icon")
+            icon_hover: self.get_style("active_setting_icon")
+    # 内容页
+    ColorBoxLayout:
+        canvas_color: self.get_style("border_color")
+        orientation: "vertical"

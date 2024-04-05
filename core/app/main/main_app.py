@@ -24,5 +24,5 @@ class MainApp(App):
 
     def init_widget(self):
         """初始化"""
-        self.title = get_text("app_title")
+        self.title = get_text("0000")
         set_center_window(get_style("window_size"))

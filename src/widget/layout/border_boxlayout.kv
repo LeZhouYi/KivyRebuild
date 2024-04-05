@@ -1,0 +1,9 @@
+#:kivy 2.3.0
+<BorderBoxLayout>
+    padding: dp(5)
+    canvas.before:
+        Color:
+            rgba: self.border_color
+        Rectangle:
+            pos: self.x+self.padding[2], self.y+self.padding[3]
+            size: self.width-(self.padding[0]+self.padding[2]), self.height-(self.padding[1]+self.padding[3])

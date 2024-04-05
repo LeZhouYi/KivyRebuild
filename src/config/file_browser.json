@@ -1,0 +1,10 @@
+{
+    "members": [
+        "members",
+        "folder_black_list"
+    ],
+    "folder_black_list": [
+        "^\\.[\\S]*$",
+        "^\\$[\\S]*$"
+    ]
+}

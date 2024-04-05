@@ -1,0 +1,36 @@
+#:kivy 2.3.0
+<LineTextLabel@ColorLabel>:
+    size_hint: None, 1
+    width: dp(110)
+    text_size: self.size
+    valign: 'middle'
+    halign: 'right'
+    color: self.get_style("font_color")
+    canvas_color: self.get_style("background_color")
+
+<SkinSettingModalView>:
+    size_hint: 0.8,0.8
+    overlay_color: self.get_style("overlay_color")
+    BorderBoxLayout:
+        ColorScrollView:
+            canvas_color: self.get_style("background_color")
+            ColorBoxLayout:
+                canvas_color: self.get_style("background_color")
+                size_hint: 1,None
+                orientation: 'vertical'
+                spacing: dp(8)
+                padding: dp(8)
+                height: self.minimum_height
+                LineBoxLayout:
+                    size_hint: 1, None
+                    height: dp(33)
+                    LineTextLabel:
+                        text: self.get_text("1001")
+                    ImageLabel:
+                        image_source: self.get_style("folder_icon")
+                        size_hint: None, 1
+                        width: dp(30)
+                    ClickLabel:
+                        id: skin_folder_label
+                        text_size: self.size
+                        valign: 'middle'

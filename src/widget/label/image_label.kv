@@ -1,0 +1,7 @@
+#:kivy 2.3.0
+<ImageLabel>:
+    canvas_color: self.get_style("background_color")
+    Image:
+        source: root.image_source
+        pos: root.x + dp(5), root.y + dp(5)
+        size: root.width-dp(10), root.height-dp(10)

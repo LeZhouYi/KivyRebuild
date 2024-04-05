@@ -4,5 +4,19 @@
         720
     ],
     "background_color": "#F3F3F3",
-    "test_color": "#000000"
+    "border_color": "#84DCC5",
+    "hover_color": "#F9A79D",
+    "test_color": "#000000",
+    "font_color": "#000000",
+    "overlay_color": "#00000039",
+    "default_icon": "src/texture/icon/slash_icon.png",
+    "menu_icon": "src/texture/icon/menu_icon.png",
+    "active_menu_icon": "src/texture/icon/active_menu_icon.png",
+    "home_icon": "src/texture/icon/home_icon.png",
+    "active_home_icon": "src/texture/icon/active_home_icon.png",
+    "setting_icon": "src/texture/icon/setting_icon.png",
+    "active_setting_icon": "src/texture/icon/active_setting_icon.png",
+    "folder_icon": "src/texture/icon/folder_icon.png",
+    "confirm_icon": "src/texture/icon/confirm_icon.png",
+    "active_confirm_icon": "src/texture/icon/active_confirm_icon.png"
 }

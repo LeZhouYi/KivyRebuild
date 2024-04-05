@@ -1,0 +1,15 @@
+#:kivy 2.3.0
+<FileBrowserModalView>:
+    size_hint: 0.8,0.8
+    overlay_color: self.get_style("overlay_color")
+    BorderBoxLayout:
+        ColorScrollView:
+            canvas_color: self.get_style("background_color")
+            ColorBoxLayout:
+                id: file_browser_content
+                canvas_color: self.get_style("background_color")
+                size_hint: 1,None
+                orientation: 'vertical'
+                spacing: dp(8)
+                padding: dp(8)
+                height: self.minimum_height

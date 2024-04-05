@@ -1,0 +1,19 @@
+#:kivy 2.3.0
+# 侧边栏模窗
+<SideBarModalView>:
+    size_hint: 0.15, 1
+    pos_hint: {"x":0}
+    ColorScrollView:
+        canvas_color: self.get_style("border_color")
+        ColorBoxLayout:
+            canvas_color: self.get_style("border_color")
+            size_hint: 1, None
+            orientation: "vertical"
+            spacing: dp(8)
+            padding: dp(8)
+            height: self.minimum_height
+            HoverLabel:
+                id: page_skin_manage
+                size_hint_y: None
+                height: dp(35)
+                text: self.get_text("0001")

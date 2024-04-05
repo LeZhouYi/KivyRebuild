@@ -1,0 +1,14 @@
+#:kivy 2.3.0
+<FileLineItem>:
+    padding: 0,0,0,dp(3)
+    size_hint_y: None
+    height: dp(36)
+    ImageLabel:
+        size_hint_x: None
+        width: dp(30)
+        image_source: self.get_style("folder_icon")
+    ClickLabel:
+        id: item_name_label
+        padding: dp(8)
+        text_size: self.size
+        valign: "middle"
