@@ -1,7 +1,10 @@
 import os.path
+import re
 import shutil
 
+from PIL import ImageGrab
 from kivy.properties import StringProperty
+from screeninfo import get_monitors
 
 from core.app import AppData
 from core.app.skin_manage.skin_item_layout import SkinItemLayout
@@ -19,12 +22,12 @@ class SkinListLayout(ColorBoxLayout):
 
     def __init__(self, data: AppData, role: str, **kwargs):
         super().__init__(**kwargs)
-
         self.data = data
         self.role = role
         self.role_data = self.data.get_value("roles")[self.role]
         self.folder_path = os.path.join(self.data.get_value("skin_list_path"), self.role)
         self.now_select = None
+        self.image_source = self.role_data["image_source"]
         self.init_widget()
 
     def init_widget(self):
@@ -36,6 +39,13 @@ class SkinListLayout(ColorBoxLayout):
     def update(self, role: str):
         """更新页面内容"""
         self.role = role
+        self.role_data = self.data.get_value("roles")[self.role]
+        self.folder_path = os.path.join(self.data.get_value("skin_list_path"), self.role)
+        self.now_select = None
+        self.image_source = self.role_data["image_source"]
+        self.ids["grid_layout"].clear_widgets()
+        self.clear_pattern_widget(r"^skin_[\S_]+$")
+        self.load_skin_item()
 
     def load_skin_item(self):
         for folder_name in os.listdir(self.folder_path):
@@ -48,7 +58,15 @@ class SkinListLayout(ColorBoxLayout):
         widget = self.cache_widget(widget_key, SkinItemLayout())
         widget.config(skin_text=folder_name)
         widget.bind_event(on_tap=self.on_tap_skin)
+        self.update_image(folder_name)
         self.ids["grid_layout"].add_widget(widget)
+
+    def update_image(self, folder_name: str):
+        """更新皮肤图片"""
+        image_name = os.path.join(self.folder_path, folder_name, self.data.get_value("preview_name"))
+        if os.path.exists(image_name):
+            widget_key = create_key("skin", folder_name)
+            self.get_widget(widget_key).update_image(image_name)
 
     def clear_skin_item(self, folder_name: str):
         """清理单个皮肤控件"""
@@ -56,6 +74,14 @@ class SkinListLayout(ColorBoxLayout):
         widget = self.get_widget(widget_key)
         self.ids["grid_layout"].remove_widget(widget)
         self.clear_widget(widget_key)
+
+    def check_monitor(self) -> int:
+        """检查当前截图的显示器，并返回当前能用的显示器的下标"""
+        display = self.data.get_value("catch_monitor")
+        index = int(re.search(r"^Display([0-9]+)$", display).group(1))
+        if index >= len(get_monitors()):
+            index = 0
+        return index
 
     def on_tap_skin(self, source):
         """点击皮肤"""
@@ -120,3 +146,12 @@ class SkinListLayout(ColorBoxLayout):
         if self.now_select is None:
             InfoModalView(info_text=get_text("1006")).open()
             return
+        monitor = get_monitors()[self.check_monitor()]
+        image_name = os.path.join(self.folder_path, self.now_select, self.data.get_value("preview_name"))
+        image_size = self.data.get_value("catch_image_size")
+        x = (monitor.width - image_size[0]) // 2 + monitor.x
+        y = monitor.height - image_size[1] + monitor.y
+        image = ImageGrab.grab(bbox=[x, y, x + image_size[0], y + image_size[1]], all_screens=True)
+        image.save(image_name)
+        self.update_image(self.now_select)
+        InfoModalView(info_text=get_text("1013")).open()

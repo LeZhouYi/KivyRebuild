@@ -12,6 +12,10 @@ class SkinItemLayout(HoverBoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+    def update_image(self, source: str):
+        self.image_source = source
+        self.ids["image"].reload()
+
     def on_touch_up(self, touch):
         """单击事件"""
         if self.collide_point(*touch.pos) and touch.button == 'left':

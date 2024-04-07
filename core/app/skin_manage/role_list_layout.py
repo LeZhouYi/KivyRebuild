@@ -1,3 +1,5 @@
+import os.path
+
 from core.app import AppData
 from core.app.skin_manage.role_item_layout import RoleItemLayout
 from core.util.widget_util import create_key
@@ -27,4 +29,7 @@ class RoleListLayout(ColorBoxLayout):
     def on_tap_role(self, source):
         """点击角色事件"""
         if isinstance(source, RoleItemLayout):
+            role_path = os.path.join(self.data.get_value("skin_list_path"), source.role)
+            if not os.path.exists(role_path):
+                os.makedirs(role_path)
             self.run_event("on_tap_role", source.role)
