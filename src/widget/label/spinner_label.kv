@@ -1,0 +1,21 @@
+#:kivy 2.3.0
+<SpinnerLabel>:
+    pos_offset: self.width-dp(25), dp(5)
+    size_hint_x: None
+    padding: dp(5),0,0,0
+    text_size: self.size
+    valign: "middle"
+
+<SpinnerModalView>:
+    overlay_color: self.get_style("overlay_transparent")
+    BorderBoxLayout:
+        ColorScrollView:
+            canvas_color: self.get_style("background_color")
+            ColorBoxLayout:
+                id:　spinner_content
+                canvas_color: self.get_style("background_color")
+                size_hint: 1,None
+                orientation: 'vertical'
+                spacing: dp(8)
+                padding: dp(8)
+                height: self.minimum_height

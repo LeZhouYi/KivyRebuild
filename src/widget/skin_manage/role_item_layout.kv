@@ -1,0 +1,19 @@
+#:kivy 2.3.0
+<RoleItemLayout>:
+    size_hint: None, None
+    size: dp(140), dp(210)
+    orientation: 'vertical'
+    padding: dp(2),dp(2),dp(2), dp(2)
+    canvas_hover: self.get_style("border_color")
+    ColorBoxLayout:
+        id: box_layout
+        padding: 0,dp(2),0,dp(2)
+        Image:
+            source: root.image_source
+            pos: box_layout.x, box_layout.y
+            size: box_layout.width, box_layout.height
+    ClickLabel:
+        id: role_label
+        text: root.role_text
+        size_hint: 1,None
+        height: dp(25)

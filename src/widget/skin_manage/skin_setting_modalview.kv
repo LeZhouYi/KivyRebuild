@@ -23,7 +23,7 @@
                 height: self.minimum_height
                 LineBoxLayout:
                     size_hint: 1, None
-                    height: dp(33)
+                    height: dp(36)
                     LineTextLabel:
                         text: self.get_text("1001")
                     ImageLabel:
@@ -34,3 +34,28 @@
                         id: skin_folder_label
                         text_size: self.size
                         valign: 'middle'
+                LineBoxLayout:
+                    size_hint: 1, None
+                    height: dp(36)
+                    LineTextLabel:
+                        text: self.get_text("1002")
+                    ImageLabel:
+                        image_source: self.get_style("folder_icon")
+                        size_hint: None, 1
+                        width: dp(30)
+                    ClickLabel:
+                        id: mods_folder_label
+                        text_size: self.size
+                        valign: 'middle'
+                LineBoxLayout:
+                    size_hint: 1, None
+                    height: dp(36)
+                    LineTextLabel:
+                        text: self.get_text("1003")
+                    ImageLabel:
+                        image_source: self.get_style("monitor_icon")
+                        size_hint: None, 1
+                        width: dp(30)
+                    SpinnerLabel:
+                        id: catch_monitor_label
+                        width: dp(110)

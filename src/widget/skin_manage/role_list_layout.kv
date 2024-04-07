@@ -1,0 +1,12 @@
+#:kivy 2.3.0
+<RoleListLayout>:
+    canvas_color: self.get_style("background_color")
+    ColorScrollView:
+        canvas_color: self.get_style("background_color")
+        ColorGridLayout:
+            id: content_layout
+            cols: 2
+            padding: dp(8)
+            spacing: dp(8)
+            size_hint: 1, None
+            canvas_color: self.get_style("background_color")

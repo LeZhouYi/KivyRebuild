@@ -9,6 +9,7 @@
     "test_color": "#000000",
     "font_color": "#000000",
     "overlay_color": "#00000039",
+    "overlay_transparent": "#00000000",
     "default_icon": "src/texture/icon/slash_icon.png",
     "menu_icon": "src/texture/icon/menu_icon.png",
     "active_menu_icon": "src/texture/icon/active_menu_icon.png",
@@ -18,5 +19,10 @@
     "active_setting_icon": "src/texture/icon/active_setting_icon.png",
     "folder_icon": "src/texture/icon/folder_icon.png",
     "confirm_icon": "src/texture/icon/confirm_icon.png",
-    "active_confirm_icon": "src/texture/icon/active_confirm_icon.png"
+    "active_confirm_icon": "src/texture/icon/active_confirm_icon.png",
+    "monitor_icon": "src/texture/icon/monitor_icon.png",
+    "down_icon": "src/texture/icon/down_icon.png",
+    "active_down_icon": "src/texture/icon/active_down_icon.png",
+    "default_role": "src/texture/skin_manage/default_role.jpg",
+    "default_skin": "src/texture/skin_manage/default_skin.png"
 }
