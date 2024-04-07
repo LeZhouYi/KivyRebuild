@@ -1,0 +1,62 @@
+#:kivy 2.3.0
+<SkinListLayout>:
+    canvas_color: self.get_style("border_color")
+    orientation: 'horizontal'
+    spacing: dp(5)
+    ColorBoxLayout:
+        canvas_color: self.get_style("background_color")
+        size_hint: None, 1
+        width: dp(180)
+        orientation: 'vertical'
+        ColorScrollView:
+            ColorBoxLayout:
+                padding: dp(8),dp(8),dp(8),dp(8)
+                spacing: dp(8)
+                orientation: 'vertical'
+                size_hint: 1, None
+                height: self.minimum_height
+                ColorBoxLayout:
+                    id: role_display_layout
+                    size_hint: 1,None
+                    height: dp(220)
+                    Image:
+                        source: root.image_source
+                        pos: role_display_layout.x, role_display_layout.y
+                        size: role_display_layout.width, role_display_layout.height
+                LineBoxLayout:
+                    size_hint: 1, None
+                    height: dp(62)
+                    padding: 0, 0, 0, dp(2)
+                    ColorBoxLayout:
+                        orientation: 'vertical'
+                        ColorLabel:
+                            id: now_select_label
+                            text: self.get_text("1005")
+                            size_hint: 1, None
+                            height: dp(30)
+                            text_size: self.size
+                            valign: 'middle'
+                        ColorLabel:
+                            id: now_select_text
+                            size_hint: 1, None
+                            height: dp(30)
+                LineBoxLayout:
+                    size_hint: 1, None
+                    height: dp(32)
+                    padding: 0, 0, 0, dp(2)
+                    IconLabel:
+                        id: edit_select_button
+                        size_hint: None, None
+                        size: dp(30),dp(30)
+
+    ColorBoxLayout:
+        ColorScrollView:
+            canvas_color: self.get_style("background_color")
+            ColorGridLayout:
+                id: grid_layout
+                canvas_color: self.get_style("background_color")
+                cols: 2
+                padding: dp(8)
+                spacing: dp(8)
+                size_hint: 1, None
+                height: self.minimum_height

@@ -13,7 +13,6 @@ class WidgetImpl:
     def __init__(self, **kwargs):
         self.widget_pool = {}  # 控件池
         self.event_mapper = {}  # 事件池
-        self.config(**kwargs)
 
     def bind_event(self, **kwargs):
         """绑定事件"""

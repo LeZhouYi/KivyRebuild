@@ -19,6 +19,12 @@ class RoleListLayout(ColorBoxLayout):
         """加载角色"""
         roles = self.data.get_value("roles")
         for role_name, role_data in roles.items():
-            widget = RoleItemLayout(data=self.data, role_data=role_data)
+            widget = RoleItemLayout(data=self.data, role=role_name)
+            widget.bind_event(on_tap_role=self.on_tap_role)
             self.cache_widget(create_key("role_item", role_name), widget)
             self.ids["content_layout"].add_widget(widget)
+
+    def on_tap_role(self, source):
+        """点击角色事件"""
+        if isinstance(source, RoleItemLayout):
+            self.run_event("on_tap_role", source.role)

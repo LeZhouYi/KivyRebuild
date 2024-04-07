@@ -117,9 +117,7 @@ class FileBrowserModalView(ColorModalView):
                 if self.exist_widget(widget_key):
                     widget = self.get_widget(widget_key)
                     widget.clear_select()
-                    self.now_select = source.path
-                else:
-                    self.now_select = None
+                self.now_select = source.path
 
     def on_enter(self, source):
         """双击访问事件"""
