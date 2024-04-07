@@ -1,0 +1,9 @@
+#:kivy 2.3.0
+<InfoModalView>:
+    size_hint: 0.2,0.15
+    overlay_color: self.get_style("overlay_color")
+    BorderBoxLayout:
+        ColorLabel:
+            canvas_color: self.get_style("background_color")
+            text: root.info_text
+            color: self.get_style("font_color")

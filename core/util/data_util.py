@@ -1,5 +1,6 @@
 import json
 import os
+import shutil
 from typing import Optional
 
 
@@ -63,3 +64,19 @@ def set_data(instance, **kwargs):
     for key, value in kwargs.items():
         if hasattr(instance, key):
             setattr(instance, key, value)
+
+
+def copy_dir(source_dir, des_dir):
+    """拷贝文件夹及其所有内容到另一文件夹下"""
+    for dir_path, dir_names, filenames in os.walk(source_dir):
+        for each_file in filenames:
+            path = os.path.join(dir_path, each_file)
+            relative_path = path[path.index(source_dir) + len(source_dir) + 1:path.rindex('\\')]
+            dirs = relative_path.split('\\')
+            for i in range(0, len(dirs)):
+                this_dir = "/"
+                for j in range(0, i + 1):
+                    this_dir = this_dir + dirs[j] + '/'
+                if not os.path.exists(des_dir + this_dir):
+                    os.mkdir(des_dir + this_dir)
+            shutil.copyfile(path, des_dir + '/' + relative_path + '/' + each_file)

@@ -11,3 +11,9 @@ class SkinItemLayout(HoverBoxLayout):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+
+    def on_touch_up(self, touch):
+        """单击事件"""
+        if self.collide_point(*touch.pos) and touch.button == 'left':
+            super().on_touch_up(touch)
+            self.run_event("on_tap")

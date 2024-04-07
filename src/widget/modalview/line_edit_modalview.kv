@@ -1,0 +1,64 @@
+#:kivy 2.3.0
+<LineEditModalView>:
+    size_hint: 0.3,0.15
+    overlay_color: self.get_style("overlay_color")
+    BorderBoxLayout:
+        ColorBoxLayout:
+            canvas_color: self.get_style("background_color")
+            padding: dp(10),dp(10),dp(30),dp(10)
+            spacing: dp(8)
+            orientation: "vertical"
+            ColorBoxLayout:
+                size_hint_y: None
+                orientation: "horizontal"
+                height: dp(32)
+                ColorLabel:
+                    text: root.info_text
+                    canvas_color: self.get_style("background_color")
+                    color: self.get_style("font_color")
+                    text_size: self.size
+                    halign: "right"
+                    valign: "middle"
+                    size_hint_x: None
+                    width: dp(110)
+                HoverBoxLayout:
+                    canvas_color: self.get_style("border_color")
+                    canvas_normal: self.get_style("border_color")
+                    padding: dp(1),dp(1),dp(1),dp(1)
+                    ColorBoxLayout:
+                        canvas_color: self.get_style("background_color")
+                        padding: 0,dp(1),0,0
+                        ColorTextInput:
+                            id: text_input
+                            text: root.input_text
+                            text_size: self.size
+            ColorBoxLayout:
+                canvas_color: self.get_style("background_color")
+                size_hint_y: None
+                orientation: "horizontal"
+                height: dp(32)
+                spacing: dp(8)
+                ColorBoxLayout:
+                    canvas_color: self.get_style("background_color")
+                HoverBoxLayout:
+                    size_hint_x: None
+                    width: dp(80)
+                    canvas_color: self.get_style("border_color")
+                    canvas_normal: self.get_style("border_color")
+                    padding: dp(1),dp(1),dp(1),dp(1)
+                    ClickLabel:
+                        id: confirm_button
+                        text: self.get_text("0003")
+                        canvas_color: self.get_style("background_color")
+                HoverBoxLayout:
+                    size_hint_x: None
+                    width: dp(80)
+                    canvas_color: self.get_style("border_color")
+                    canvas_normal: self.get_style("border_color")
+                    padding: dp(1),dp(1),dp(1),dp(1)
+                    ClickLabel:
+                        id: cancel_button
+                        text: self.get_text("0004")
+                        canvas_color: self.get_style("background_color")
+                ColorBoxLayout:
+                    canvas_color: self.get_style("background_color")

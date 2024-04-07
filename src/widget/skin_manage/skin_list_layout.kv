@@ -9,7 +9,9 @@
         width: dp(180)
         orientation: 'vertical'
         ColorScrollView:
+            canvas_color: self.get_style("background_color")
             ColorBoxLayout:
+                canvas_color: self.get_style("background_color")
                 padding: dp(8),dp(8),dp(8),dp(8)
                 spacing: dp(8)
                 orientation: 'vertical'
@@ -17,6 +19,7 @@
                 height: self.minimum_height
                 ColorBoxLayout:
                     id: role_display_layout
+                    canvas_color: self.get_style("background_color")
                     size_hint: 1,None
                     height: dp(220)
                     Image:
@@ -30,7 +33,8 @@
                     ColorBoxLayout:
                         orientation: 'vertical'
                         ColorLabel:
-                            id: now_select_label
+                            canvas_color: self.get_style("background_color")
+                            color: self.get_style("font_color")
                             text: self.get_text("1005")
                             size_hint: 1, None
                             height: dp(30)
@@ -38,6 +42,8 @@
                             valign: 'middle'
                         ColorLabel:
                             id: now_select_text
+                            color: self.get_style("font_color")
+                            canvas_color: self.get_style("background_color")
                             size_hint: 1, None
                             height: dp(30)
                 LineBoxLayout:
@@ -48,6 +54,23 @@
                         id: edit_select_button
                         size_hint: None, None
                         size: dp(30),dp(30)
+                        icon_source: self.get_style("edit_icon")
+                        icon_normal: self.get_style("edit_icon")
+                        icon_hover: self.get_style("active_edit_icon")
+                    IconLabel:
+                        id: use_select_button
+                        size_hint: None, None
+                        size: dp(30),dp(30)
+                        icon_source: self.get_style("send_icon")
+                        icon_normal: self.get_style("send_icon")
+                        icon_hover: self.get_style("active_send_icon")
+                    IconLabel:
+                        id: camera_button
+                        size_hint: None, None
+                        size: dp(30),dp(30)
+                        icon_source: self.get_style("camera_icon")
+                        icon_normal: self.get_style("camera_icon")
+                        icon_hover: self.get_style("active_camera_icon")
 
     ColorBoxLayout:
         ColorScrollView:

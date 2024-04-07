@@ -25,4 +25,4 @@ class RoleItemLayout(HoverBoxLayout):
         """单击事件"""
         if self.collide_point(*touch.pos) and touch.button == 'left':
             super().on_touch_up(touch)
-            self.run_event("on_tap_role")
+            self.run_event("on_tap")

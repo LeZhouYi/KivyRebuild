@@ -20,7 +20,7 @@ class RoleListLayout(ColorBoxLayout):
         roles = self.data.get_value("roles")
         for role_name, role_data in roles.items():
             widget = RoleItemLayout(data=self.data, role=role_name)
-            widget.bind_event(on_tap_role=self.on_tap_role)
+            widget.bind_event(on_tap=self.on_tap_role)
             self.cache_widget(create_key("role_item", role_name), widget)
             self.ids["content_layout"].add_widget(widget)
 
