@@ -1,5 +1,5 @@
 from kivy.metrics import dp
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, ListProperty
 from kivy.uix.widget import Widget
 
 from core.util.widget_util import create_key
@@ -10,6 +10,10 @@ from core.widget.modalview import ColorModalView
 
 class SpinnerModalView(ColorModalView):
     """弹出的下拉窗"""
+
+    size_offset = ListProperty([0, 0])
+    pos_offset = ListProperty([0, 0])
+    will_dismiss = True
 
     def __init__(self, relate_widget: Widget, values: list, **kwargs):
         super().__init__(**kwargs)
@@ -44,15 +48,17 @@ class SpinnerModalView(ColorModalView):
             if content_height * 2 >= window_size[1] * self.max_size_y:
                 content_height = window_size[1] * self.max_size_y / 2
             # 设置弹窗大小、位置
-            self.size_hint = (relate_size[0] / window_size[0], content_height * 2 / window_size[1])
+            self.size_hint = ((relate_size[0] + self.size_offset[0]) / window_size[0],
+                              (content_height * 2 + self.size_offset[1]) / window_size[1])
             self.pos_hint = {
-                "x": relate_pos[0] / window_size[0],
-                "y": (relate_pos[1] - content_height * 1.85) / window_size[1]
+                "x": (relate_pos[0] + self.pos_offset[0]) / window_size[0],
+                "y": (relate_pos[1] - content_height * 1.85 - self.pos_offset[1]) / window_size[1]
             }
 
     def on_select(self, source):
         """点击选择事件"""
-        self.dismiss()
+        if self.will_dismiss:
+            self.dismiss()
         self.run_event("on_select", source.text)
 
 

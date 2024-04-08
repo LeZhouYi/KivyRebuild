@@ -2,7 +2,7 @@ from kivy.clock import Clock
 from kivy.properties import ColorProperty
 
 from core.widget import get_style
-from core.widget.label import ColorLabel
+from core.widget.label.color_label import ColorLabel
 
 
 class ClickLabel(ColorLabel):

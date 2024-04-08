@@ -24,32 +24,39 @@
                 LineBoxLayout:
                     size_hint: 1, None
                     height: dp(36)
+                    spacing: dp(8)
                     LineTextLabel:
                         text: self.get_text("1001")
                     ImageLabel:
                         image_source: self.get_style("folder_icon")
                         size_hint: None, 1
                         width: dp(30)
-                    ClickLabel:
+                    HoverLabel:
                         id: skin_folder_label
                         text_size: self.size
                         valign: 'middle'
+                    ColorBoxLayout:
+                        canvas_color: self.get_style("background_color")
                 LineBoxLayout:
                     size_hint: 1, None
                     height: dp(36)
+                    spacing: dp(8)
                     LineTextLabel:
                         text: self.get_text("1002")
                     ImageLabel:
                         image_source: self.get_style("folder_icon")
                         size_hint: None, 1
                         width: dp(30)
-                    ClickLabel:
+                    HoverLabel:
                         id: mods_folder_label
                         text_size: self.size
                         valign: 'middle'
+                    ColorBoxLayout:
+                        canvas_color: self.get_style("background_color")
                 LineBoxLayout:
                     size_hint: 1, None
                     height: dp(36)
+                    spacing: dp(8)
                     LineTextLabel:
                         text: self.get_text("1003")
                     ImageLabel:
@@ -59,3 +66,19 @@
                     SpinnerLabel:
                         id: catch_monitor_label
                         width: dp(110)
+                LineBoxLayout:
+                    size_hint: 1, None
+                    height: dp(36)
+                    spacing: dp(8)
+                    LineTextLabel:
+                        text: self.get_text("1014")
+                    ImageLabel:
+                        image_source: self.get_style("camera_icon")
+                        size_hint: None, 1
+                        width: dp(30)
+                    HoverLabel:
+                        id: image_size_label
+                        text_size: self.size
+                        valign: 'middle'
+                    ColorBoxLayout:
+                        canvas_color: self.get_style("background_color")

@@ -1,11 +1,16 @@
+import re
+
 from screeninfo import get_monitors
 
 from core.app import AppData
+from core.lang import get_text
 from core.util.data_util import check_folder
 from core.util.widget_util import event_adaptor
 from core.widget.file_browser import FileBrowserModalView, FileBrowserMode
 from core.widget.label import ColorLabel
 from core.widget.modalview import ColorModalView
+from core.widget.modalview.info_modalview import InfoModalView
+from core.widget.modalview.line_eidt_modalview import LineEditModalView
 
 
 class SkinSettingModalView(ColorModalView):
@@ -20,6 +25,10 @@ class SkinSettingModalView(ColorModalView):
         self.ids["skin_folder_label"].bind_event(on_tap=event_adaptor(self.on_folder, data_key="skin_list_path"))
         self.ids["mods_folder_label"].text = self.check_folder("mods_path")
         self.ids["mods_folder_label"].bind_event(on_tap=event_adaptor(self.on_folder, data_key="mods_path"))
+        image_size = self.data.get_value("catch_image_size")
+        image_text = "%sx%s" % (image_size[0], image_size[1])
+        self.ids["image_size_label"].text = image_text
+        self.ids["image_size_label"].bind_event(on_tap=self.on_image_size)
         self.check_monitor()
 
     def check_monitor(self):
@@ -79,3 +88,22 @@ class SkinSettingModalView(ColorModalView):
     def on_dismiss(self):
         """关闭模窗事件"""
         self.data.write_data()
+
+    def on_image_size(self, source):
+        """点击更改截图尺寸事件"""
+        image_size = self.data.get_value("catch_image_size")
+        image_text = "%sx%s" % (image_size[0], image_size[1])
+        edit_view = LineEditModalView(input_text=image_text, info_text=get_text("1015"))
+        edit_view.bind_event(on_confirm=self.on_edit_image_size)
+        edit_view.open()
+
+    def on_edit_image_size(self, source):
+        """点击完成截图尺寸编辑事件"""
+        if isinstance(source, LineEditModalView):
+            input_text = source.input_text
+            if re.match("^[0-9]+x[0-9]+$", input_text):
+                image_size = [int(value) for value in input_text.split("x")]
+                self.data.set_value("catch_image_size", image_size)
+                self.ids["image_size_label"].text = input_text
+            else:
+                InfoModalView(info_text=get_text("1016"))

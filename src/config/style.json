@@ -29,6 +29,8 @@
     "active_send_icon": "src/texture/icon/active_send_icon.png",
     "camera_icon": "src/texture/icon/camera_icon.png",
     "active_camera_icon": "src/texture/icon/active_camera_icon.png",
+    "star_icon": "src/texture/icon/star_icon.png",
+    "active_star_icon": "src/texture/icon/active_star_icon.png",
     "default_role": "src/texture/skin_manage/default_role.jpg",
     "default_skin": "src/texture/skin_manage/default_skin.png",
     "background_normal": "src/texture/background/background_normal.png",

@@ -1,5 +1,6 @@
 import json
 import os
+import platform
 import shutil
 from typing import Optional
 
@@ -68,11 +69,12 @@ def set_data(instance, **kwargs):
 
 def copy_dir(source_dir, des_dir):
     """拷贝文件夹及其所有内容到另一文件夹下"""
+    char = '\\' if platform.system() == "Windows" else '/'
     for dir_path, dir_names, filenames in os.walk(source_dir):
         for each_file in filenames:
             path = os.path.join(dir_path, each_file)
-            relative_path = path[path.index(source_dir) + len(source_dir) + 1:path.rindex('\\')]
-            dirs = relative_path.split('\\')
+            relative_path = path[path.index(source_dir) + len(source_dir) + 1:path.rindex(char)]
+            dirs = relative_path.split(char)
             for i in range(0, len(dirs)):
                 this_dir = "/"
                 for j in range(0, i + 1):

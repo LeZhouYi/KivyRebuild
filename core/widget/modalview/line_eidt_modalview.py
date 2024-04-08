@@ -1,7 +1,7 @@
 from kivy.properties import StringProperty
 
-from core.widget.modalview import ColorModalView
 from core.widget.input import ColorTextInput  # type: ignore
+from core.widget.modalview import ColorModalView
 
 
 class LineEditModalView(ColorModalView):
@@ -16,6 +16,7 @@ class LineEditModalView(ColorModalView):
 
     def init_widget(self):
         self.ids["confirm_button"].bind_event(on_tap=self.on_confirm)
+        self.ids["cancel_button"].bind_event(on_tap=self.on_cancel)
 
     def on_confirm(self, source):
         self.dismiss()

@@ -12,6 +12,8 @@
                 size_hint_y: None
                 orientation: "horizontal"
                 height: dp(32)
+                spacing: dp(8)
+                canvas_color: self.get_style("background_color")
                 ColorLabel:
                     text: root.info_text
                     canvas_color: self.get_style("background_color")
@@ -27,7 +29,7 @@
                     padding: dp(1),dp(1),dp(1),dp(1)
                     ColorBoxLayout:
                         canvas_color: self.get_style("background_color")
-                        padding: 0,dp(1),0,0
+                        padding: 0,dp(2),0,0
                         ColorTextInput:
                             id: text_input
                             text: root.input_text

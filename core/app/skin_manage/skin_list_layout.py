@@ -3,6 +3,7 @@ import re
 import shutil
 
 from PIL import ImageGrab
+from kivy.metrics import dp
 from kivy.properties import StringProperty
 from screeninfo import get_monitors
 
@@ -12,6 +13,7 @@ from core.lang import get_text
 from core.util.data_util import is_dir, copy_dir
 from core.util.widget_util import create_key
 from core.widget import get_style
+from core.widget.label import SpinnerModalView
 from core.widget.layout import ColorBoxLayout
 from core.widget.modalview.info_modalview import InfoModalView
 from core.widget.modalview.line_eidt_modalview import LineEditModalView
@@ -35,6 +37,7 @@ class SkinListLayout(ColorBoxLayout):
         self.ids["edit_select_button"].bind_event(on_tap=self.on_edit)
         self.ids["use_select_button"].bind_event(on_tap=self.on_use_skin)
         self.ids["camera_button"].bind_event(on_tap=self.on_camera)
+        self.ids["star_button"].bind_event(on_tap=self.on_star)
 
     def update(self, role: str):
         """更新页面内容"""
@@ -155,3 +158,13 @@ class SkinListLayout(ColorBoxLayout):
         image.save(image_name)
         self.update_image(self.now_select)
         InfoModalView(info_text=get_text("1013")).open()
+
+    def on_star(self, source):
+        """添加收藏事件"""
+        if self.now_select is None:
+            InfoModalView(info_text=get_text("1006")).open()
+            return
+        collect_set = self.data.get_value("collect_set")
+        view = SpinnerModalView(relate_widget=source, values=collect_set.keys())
+        view.config(size_offset=[dp(110), 0], will_dismiss=False)
+        view.open()
