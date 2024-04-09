@@ -166,5 +166,8 @@ class SkinListLayout(ColorBoxLayout):
             return
         collect_set = self.data.get_value("collect_set")
         view = SpinnerModalView(relate_widget=source, values=collect_set.keys())
-        view.config(size_offset=[dp(110), 0], will_dismiss=False)
+        view.config(size_offset=[dp(110), 0])
         view.open()
+
+    def on_star_finish(self, source, value):
+        """完成添加收藏"""
