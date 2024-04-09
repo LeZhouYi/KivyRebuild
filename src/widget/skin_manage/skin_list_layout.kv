@@ -49,7 +49,7 @@
                 LineBoxLayout:
                     size_hint: 1, None
                     height: dp(32)
-                    padding: 0, 0, 0, dp(2)
+                    padding: 0, 0, 0, 0
                     IconLabel:
                         id: edit_select_button
                         size_hint: None, None
@@ -78,7 +78,31 @@
                         icon_source: self.get_style("star_icon")
                         icon_normal: self.get_style("star_icon")
                         icon_hover: self.get_style("active_star_icon")
-
+                    IconLabel:
+                        id: trash_button
+                        size_hint: None, None
+                        size: dp(30),dp(30)
+                        icon_source: self.get_style("trash_icon")
+                        icon_normal: self.get_style("trash_icon")
+                        icon_hover: self.get_style("active_trash_icon")
+                LineBoxLayout:
+                    size_hint: 1, None
+                    height: dp(32)
+                    padding: 0, 0, 0, dp(2)
+                    IconLabel:
+                        id: delete_star_button
+                        size_hint: None, None
+                        size: dp(30),dp(30)
+                        icon_source: self.get_style("minus_icon")
+                        icon_normal: self.get_style("minus_icon")
+                        icon_hover: self.get_style("active_minus_icon")
+                    IconLabel:
+                        id: add_star_button
+                        size_hint: None, None
+                        size: dp(30),dp(30)
+                        icon_source: self.get_style("add_icon")
+                        icon_normal: self.get_style("add_icon")
+                        icon_hover: self.get_style("active_add_icon")
     ColorBoxLayout:
         ColorScrollView:
             canvas_color: self.get_style("background_color")

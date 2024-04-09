@@ -18,7 +18,7 @@ class ColorBoxLayout(BoxLayout, WidgetImpl):
         amount = len(self.children)
         if amount == 0:
             self.height = 0
-        elif amount == 2:
+        elif amount == 1:
             self.height = self.children[0].height + self.padding[1] + self.padding[3]
         else:
             height = self.padding[1] + self.padding[3] + self.spacing * (amount - 1)

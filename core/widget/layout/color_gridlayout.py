@@ -25,6 +25,6 @@ class ColorGridLayout(GridLayout, WidgetImpl):
                     self.children[0].width + self.spacing[0])
             if cols > 1:
                 self.cols = int(cols)
-                row = int(math.ceil(amount / cols))
+                row = int(math.ceil(amount / int(cols)))
                 base_height = (row - 1) * self.spacing[0] + self.padding[1] + self.padding[3]
                 self.height = row * self.children[0].height + base_height

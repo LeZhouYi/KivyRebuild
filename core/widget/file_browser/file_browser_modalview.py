@@ -23,11 +23,12 @@ class FileBrowserModalView(ColorModalView):
     path表示当前要浏览的文件夹，将显示该文件夹下的内容
     """
 
-    def __init__(self, mode: str, path: str, **kwargs):
+    def __init__(self, mode: str, path: str, can_enter: bool = True, **kwargs):
         super().__init__(**kwargs)
         self.mode = mode
         self.path = path
         self.now_select = None
+        self.can_enter = can_enter
         self.data = AppData(get_config("filebrowser_config_path"))
         self.init_widget()
 
@@ -49,7 +50,8 @@ class FileBrowserModalView(ColorModalView):
     def load_folder(self):
         """加载文件夹"""
         self.clear_folder_item()
-        self.add_folder_item(". . .")
+        if self.can_enter:
+            self.add_folder_item(". . .")
         for file_name in os.listdir(self.path):
             if is_dir(self.path, file_name) and not self.is_in_blacklist(file_name):
                 self.add_folder_item(file_name)
@@ -121,7 +123,7 @@ class FileBrowserModalView(ColorModalView):
 
     def on_enter(self, source):
         """双击访问事件"""
-        if isinstance(source, FileLineItem):
+        if isinstance(source, FileLineItem) and self.can_enter:
             if source.path == ". . .":
                 self.load_parent_folder()
             elif self.path is None:

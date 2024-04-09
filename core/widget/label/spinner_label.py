@@ -45,14 +45,14 @@ class SpinnerModalView(ColorModalView):
             relate_size = self.relate_widget.size
             # 超出尺寸时采用最大默认尺寸
             content_height = self.ids["spinner_content"].height
-            if content_height * 2 >= window_size[1] * self.max_size_y:
+            if content_height >= window_size[1] * self.max_size_y:
                 content_height = window_size[1] * self.max_size_y / 2
             # 设置弹窗大小、位置
             self.size_hint = ((relate_size[0] + self.size_offset[0]) / window_size[0],
-                              (content_height * 2 + self.size_offset[1]) / window_size[1])
+                              (content_height + self.size_offset[1]) / window_size[1])
             self.pos_hint = {
                 "x": (relate_pos[0] + self.pos_offset[0]) / window_size[0],
-                "y": (relate_pos[1] - content_height * 1.85 - self.pos_offset[1]) / window_size[1]
+                "y": (relate_pos[1] - content_height - self.pos_offset[1]) / window_size[1]
             }
 
     def on_select(self, source):

@@ -11,10 +11,11 @@ from core.app import AppData
 from core.app.skin_manage.skin_item_layout import SkinItemLayout
 from core.lang import get_text
 from core.util.data_util import is_dir, copy_dir
-from core.util.widget_util import create_key
+from core.util.widget_util import create_key, event_adaptor
 from core.widget import get_style
 from core.widget.label import SpinnerModalView
 from core.widget.layout import ColorBoxLayout
+from core.widget.modalview import ConfirmModalView
 from core.widget.modalview.info_modalview import InfoModalView
 from core.widget.modalview.line_eidt_modalview import LineEditModalView
 
@@ -38,6 +39,9 @@ class SkinListLayout(ColorBoxLayout):
         self.ids["use_select_button"].bind_event(on_tap=self.on_use_skin)
         self.ids["camera_button"].bind_event(on_tap=self.on_camera)
         self.ids["star_button"].bind_event(on_tap=self.on_star)
+        self.ids["add_star_button"].bind_event(on_tap=self.on_add_star)
+        self.ids["delete_star_button"].bind_event(on_tap=self.on_delete_star)
+        self.ids["trash_button"].bind_event(on_tap=self.on_delete_skin)
 
     def update(self, role: str):
         """更新页面内容"""
@@ -70,6 +74,23 @@ class SkinListLayout(ColorBoxLayout):
         if os.path.exists(image_name):
             widget_key = create_key("skin", folder_name)
             self.get_widget(widget_key).update_image(image_name)
+
+    def check_collect(self, old_name: str, new_name: str):
+        """
+        检查收藏集，若该收藏集中包含当前的皮肤，则更新新的皮肤名称
+        :param old_name: 旧皮肤名称
+        :param new_name: 新皮肤名称
+        """
+        collect_set = self.data.get_value("collect_set")
+        need_correct_list = []
+        for key, value in collect_set.items():
+            if self.role in value and value[self.role] == old_name:
+                need_correct_list.append(key)
+        for key in need_correct_list:
+            collect_set[key][self.role] = new_name
+        if len(need_correct_list) > 0:
+            self.data.set_value("collect_set", collect_set)
+            self.data.write_data()
 
     def clear_skin_item(self, folder_name: str):
         """清理单个皮肤控件"""
@@ -120,6 +141,7 @@ class SkinListLayout(ColorBoxLayout):
             older_folder = os.path.join(self.folder_path, self.now_select)
             os.renames(older_folder, new_folder)
             self.clear_skin_item(self.now_select)
+            self.check_collect(self.now_select, source.input_text)
             self.now_select = source.input_text
             self.ids["now_select_text"].text = self.now_select
             self.add_skin_item(self.now_select)
@@ -145,7 +167,7 @@ class SkinListLayout(ColorBoxLayout):
         InfoModalView(info_text=get_text("1011")).open()
 
     def on_camera(self, source):
-        """制作皮肤预临览事件"""
+        """制作皮肤预览事件"""
         if self.now_select is None:
             InfoModalView(info_text=get_text("1006")).open()
             return
@@ -167,7 +189,84 @@ class SkinListLayout(ColorBoxLayout):
         collect_set = self.data.get_value("collect_set")
         view = SpinnerModalView(relate_widget=source, values=collect_set.keys())
         view.config(size_offset=[dp(110), 0])
+        view.bind_event(on_select=self.on_star_finish)
         view.open()
 
     def on_star_finish(self, source, value):
         """完成添加收藏"""
+        if self.now_select is None:
+            return
+        collect_set = self.data.get_value("collect_set")
+        if len(collect_set) == 0:
+            InfoModalView(info_text=get_text("1021")).open()
+            return
+        if value in collect_set:
+            collect_set[value][self.role] = self.now_select
+            self.data.set_value("collect_set", collect_set)
+            self.data.write_data()
+            InfoModalView(info_text=get_text("1017")).open()
+
+    def on_add_star(self, source):
+        """添加新收藏集"""
+        view = LineEditModalView(info_text=get_text("1018"))
+        view.bind_event(on_confirm=self.on_add_star_finish)
+        view.open()
+
+    def on_add_star_finish(self, source):
+        """完成新增收藏集"""
+        if isinstance(source, LineEditModalView):
+            if source.input_text == "":
+                InfoModalView(info_text=get_text("1008")).open()
+                return
+            collect_set = self.data.get_value("collect_set")
+            if source.input_text in collect_set:
+                InfoModalView(info_text=get_text("1019")).open()
+                return
+            collect_set[source.input_text] = {}
+            self.data.set_value("collect_set", collect_set)
+            self.data.write_data()
+            InfoModalView(info_text=get_text("1020")).open()
+
+    def on_delete_star(self, source):
+        """删除收藏夹"""
+        collect_set = self.data.get_value("collect_set")
+        if len(collect_set) == 0:
+            InfoModalView(info_text=get_text("1021")).open()
+            return
+        view = SpinnerModalView(relate_widget=source, values=collect_set.keys())
+        view.config(size_offset=[dp(110), 0])
+        view.bind_event(on_select=self.on_delete_star_select)
+        view.open()
+
+    def on_delete_star_select(self, source, value):
+        """选中要删除收藏夹事件"""
+        view = ConfirmModalView(info_text=get_text("1022"))
+        view.bind_event(on_confirm=event_adaptor(self.on_delete_star_finish, value=value))
+        view.open()
+
+    def on_delete_star_finish(self, source, value):
+        """完成删除收藏夹"""
+        collect_set = self.data.get_value("collect_set")
+        if value in collect_set and isinstance(collect_set, dict):
+            collect_set.pop(value)
+            self.data.set_value("collect_set", collect_set)
+            self.data.write_data()
+            InfoModalView(info_text=get_text("1023")).open()
+
+    def on_delete_skin(self, source):
+        """点击删除皮肤事件"""
+        if self.now_select is None:
+            InfoModalView(info_text=get_text("1006")).open()
+            return
+        view = ConfirmModalView(info_text=get_text("1024"))
+        view.bind_event(on_confirm=self.on_delete_skin_finish)
+        view.open()
+
+    def on_delete_skin_finish(self, source):
+        """确认删除皮肤事件"""
+        self.clear_skin_item(self.now_select)
+        folder = os.path.join(self.folder_path, self.now_select)
+        shutil.rmtree(folder)
+        self.now_select = None
+        self.ids["now_select_text"].text = ""
+        InfoModalView(info_text=get_text("1025"))

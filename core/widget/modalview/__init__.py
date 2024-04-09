@@ -1,1 +1,2 @@
 from .color_modalview import ColorModalView
+from .confirm_modalview import ConfirmModalView
