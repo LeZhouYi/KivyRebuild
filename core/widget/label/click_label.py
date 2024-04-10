@@ -29,8 +29,6 @@ class ClickLabel(ColorLabel):
                     self.tap_count += 1
                 else:
                     self.tap_start_time = Clock.get_time()
-            if self.tap_count != 2:
-                self.run_event("on_tap")
             return True
 
     def on_touch_up(self, touch):
@@ -43,3 +41,4 @@ class ClickLabel(ColorLabel):
                 if time_delta < self.tap_span_time:
                     self.run_event("on_double_tap")
                 self.tap_count = 0
+            self.run_event("on_tap")

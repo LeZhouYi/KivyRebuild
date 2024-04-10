@@ -71,9 +71,9 @@ class SpinnerLabel(IconLabel):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.values = []
+        self.init_widget()
 
     def init_widget(self):
-        super().init_widget()
         self.bind_event(on_tap=self.on_tap)
 
     def on_tap(self, source):

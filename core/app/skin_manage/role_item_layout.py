@@ -11,13 +11,13 @@ class RoleItemLayout(HoverBoxLayout):
     role_text = StringProperty(get_text("1004"))
 
     def __init__(self, data: AppData, role: str, **kwargs):
+        super().__init__(**kwargs)
         self.data = data
         self.role = role
         self.role_data = self.data.get_value("roles")[self.role]
-        super().__init__(**kwargs)
+        self.init_widget()
 
     def init_widget(self):
-        super().init_widget()
         self.role_text = self.role_data["text"]
         self.image_source = self.role_data["image_source"]
 
